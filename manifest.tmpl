@@ -1,0 +1,32 @@
+image: rancher/fluent-bit:{{build.tag}}
+manifests:
+  -
+    image: rancher/fluent-bit:{{build.tag}}-windows-1809-amd64
+    platform:
+      architecture: amd64
+      os: windows
+      version: 1809
+  -
+    image: rancher/fluent-bit:{{build.tag}}-windows-1903-amd64
+    platform:
+      architecture: amd64
+      os: windows
+      version: 1903
+  -
+    image: rancher/fluent-bit:{{build.tag}}-windows-1909-amd64
+    platform:
+      architecture: amd64
+      os: windows
+      version: 1909
+  -
+    image: rancher/fluent-bit:{{build.tag}}-windows-2004-amd64
+    platform:
+      architecture: amd64
+      os: windows
+      version: 2004
+  -
+    image: rancher/fluent-bit:{{build.tag}}-windows-20H2-amd64
+    platform:
+      architecture: amd64
+      os: windows
+      version: 20H2
