@@ -4,7 +4,7 @@
 
 ## Updating
 
-1. Change the value in `version.json`.
-1. Run `make`.
-1. Commit those changes.
-1. Tag a new release with `git tag`.
+1. Change the value in `version.json` to the new version.
+1. Run `make sync`.
+1. Commit those changes and push/merge into the main branch (`master`).
+1. Tag a new release with `make tag`.
