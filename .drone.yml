@@ -274,11 +274,124 @@ trigger:
       - promote
 ---
 kind: pipeline
+name: linux-amd64
+platform:
+  os: linux
+  arch: amd64
+steps:
+  - name: build
+    image: rancher/dapper:v0.5.6
+    commands:
+      - "docker pull fluent/fluent-bit:x86_64-1.6.10"
+    volumes:
+      - name: docker
+        path: /var/run/docker.sock
+    when:
+      event:
+        - tag
+  - name: docker-publish
+    image: plugins/docker
+    settings:
+      custom_dns: 1.1.1.1
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: "rancher/fluent-bit"
+      tag: "${DRONE_TAG}-linux-amd64"
+    when:
+      event:
+        - tag
+volumes:
+  - name: docker
+    host:
+      path: /var/run/docker.sock
+trigger:
+  event:
+    exclude:
+      - promote
+---
+kind: pipeline
+name: linux-arm64
+platform:
+  os: linux
+  arch: arm64
+steps:
+  - name: build
+    image: rancher/dapper:v0.5.6
+    commands:
+      - "docker pull fluent/fluent-bit:arm64v8-1.6.10"
+    volumes:
+      - name: docker
+        path: /var/run/docker.sock
+    when:
+      event:
+        - tag
+  - name: docker-publish
+    image: plugins/docker
+    settings:
+      custom_dns: 1.1.1.1
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: "rancher/fluent-bit"
+      tag: "${DRONE_TAG}-linux-arm64"
+    when:
+      event:
+        - tag
+volumes:
+  - name: docker
+    host:
+      path: /var/run/docker.sock
+trigger:
+  event:
+    exclude:
+      - promote
+---
+kind: pipeline
+name: linux-arm
+platform:
+  os: linux
+  arch: arm
+steps:
+  - name: build
+    image: rancher/dapper:v0.5.6
+    commands:
+      - "docker pull fluent/fluent-bit:arm32v7-1.6.10"
+    volumes:
+      - name: docker
+        path: /var/run/docker.sock
+    when:
+      event:
+        - tag
+  - name: docker-publish
+    image: plugins/docker
+    settings:
+      custom_dns: 1.1.1.1
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: "rancher/fluent-bit"
+      tag: "${DRONE_TAG}-linux-arm"
+    when:
+      event:
+        - tag
+volumes:
+  - name: docker
+    host:
+      path: /var/run/docker.sock
+trigger:
+  event:
+    exclude:
+      - promote
+---
+kind: pipeline
 name: manifest
 platform:
-  os: windows
+  os: linux
   arch: amd64
-  version: 1809
 steps:
   - name: push-manifest
     image: plugins/manifest
@@ -304,3 +417,6 @@ depends_on:
   - windows-1909-amd64
   - windows-2004-amd64
   - windows-20H2-amd64
+  - linux-amd64
+  - linux-arm64
+  - linux-arm
