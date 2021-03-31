@@ -33,7 +33,7 @@ steps:
       password:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
-      tag: "${DRONE_TAG}-windows-1809"
+      tag: "${DRONE_TAG}-windows-1809-amd64"
     volumes:
       - name: docker_pipe
         path: \\\\.\\pipe\\docker_engine
@@ -86,7 +86,7 @@ steps:
       password:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
-      tag: "${DRONE_TAG}-windows-1903"
+      tag: "${DRONE_TAG}-windows-1903-amd64"
     volumes:
       - name: docker_pipe
         path: \\\\.\\pipe\\docker_engine
@@ -138,7 +138,8 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-      repo: rancher/fluent-bit
+      repo: "rancher/fluent-bit"
+      tag: "${DRONE_TAG}-windows-1909-amd64"
     volumes:
       - name: docker_pipe
         path: \\\\.\\pipe\\docker_engine
@@ -196,7 +197,7 @@ steps:
       password:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
-      tag: "${DRONE_TAG}-windows-2004"
+      tag: "${DRONE_TAG}-windows-2004-amd64"
     volumes:
       - name: docker_pipe
         path: \\\\.\\pipe\\docker_engine
@@ -254,7 +255,7 @@ steps:
       password:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
-      tag: "${DRONE_TAG}-windows-20H2"
+      tag: "${DRONE_TAG}-windows-20H2-amd64"
     volumes:
       - name: docker_pipe
         path: \\\\.\\pipe\\docker_engine
