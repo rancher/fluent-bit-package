@@ -299,6 +299,7 @@ steps:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
       tag: "${DRONE_TAG}-linux-amd64"
+      cache_from: "fluent/fluent-bit:x86_64-1.6.10"
     when:
       event:
         - tag
@@ -337,6 +338,7 @@ steps:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
       tag: "${DRONE_TAG}-linux-arm64"
+      cache_from: "fluent/fluent-bit:arm64v8-1.6.10"
     when:
       event:
         - tag
@@ -375,6 +377,7 @@ steps:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
       tag: "${DRONE_TAG}-linux-arm"
+      cache_from: "fluent/fluent-bit:arm32v7-1.6.10"
     when:
       event:
         - tag
