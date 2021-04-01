@@ -10,3 +10,15 @@
 1. Run `make`.
 1. Commit those changes and push/merge into the main branch (`master`).
 1. Tag a new release and push into the main branch (`master`).
+
+## Testing with the Upstream Chart
+
+One way to test the upstream chart with this package is to edit the default repository and tag in the Go code, and then test the chart locally.
+
+```sh
+make manifests
+make generate
+make install
+go run main.go
+helm install logging-demo ./charts/logging-demo --set "minio.enabled=True"
+```
