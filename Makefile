@@ -1,7 +1,7 @@
 SHORT_VERSION:=$(shell jq .shortVersion version.json | tr -d '"')
 FULL_VERSION:=$(shell jq .fullVersion version.json | tr -d '"')
 MAKEPATH:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-BRANCH:=feature/multi_fluentbit_support
+BRANCH:=master
 
 SED=sed
 ifeq ($(shell uname), Darwin)
