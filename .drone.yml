@@ -169,7 +169,7 @@ clone:
   disable: true
 steps:
   - name: clone
-    image: luthermonson/drone-git:windows-2004
+    image: luthermonson/drone-git:windows-2004-amd64
   - name: build
     pull: always
     image: rancher/dapper:v0.5.6
@@ -227,7 +227,7 @@ clone:
   disable: true
 steps:
   - name: clone
-    image: luthermonson/drone-git:windows-20H2
+    image: luthermonson/drone-git:windows-20H2-amd64
   - name: build
     pull: always
     image: rancher/dapper:v0.5.6
