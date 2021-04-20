@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: windows-1809-amd64
+name: windows-1809
 platform:
   os: windows
   arch: amd64
@@ -33,7 +33,7 @@ steps:
       password:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
-      tag: "${DRONE_TAG}-windows-1809-amd64"
+      tag: "${DRONE_TAG}-windows-1809"
     volumes:
       - name: docker_pipe
         path: \\\\.\\pipe\\docker_engine
@@ -53,7 +53,7 @@ trigger:
       - promote
 ---
 kind: pipeline
-name: windows-1903-amd64
+name: windows-1903
 platform:
   os: windows
   arch: amd64
@@ -86,7 +86,7 @@ steps:
       password:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
-      tag: "${DRONE_TAG}-windows-1903-amd64"
+      tag: "${DRONE_TAG}-windows-1903"
     volumes:
       - name: docker_pipe
         path: \\\\.\\pipe\\docker_engine
@@ -106,7 +106,7 @@ trigger:
       - promote
 ---
 kind: pipeline
-name: windows-1909-amd64
+name: windows-1909
 platform:
   os: windows
   arch: amd64
@@ -139,7 +139,7 @@ steps:
       password:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
-      tag: "${DRONE_TAG}-windows-1909-amd64"
+      tag: "${DRONE_TAG}-windows-1909"
     volumes:
       - name: docker_pipe
         path: \\\\.\\pipe\\docker_engine
@@ -159,7 +159,7 @@ trigger:
       - promote
 ---
 kind: pipeline
-name: windows-2004-amd64
+name: windows-2004
 platform:
   os: windows
   arch: amd64
@@ -169,7 +169,7 @@ clone:
   disable: true
 steps:
   - name: clone
-    image: luthermonson/drone-git:windows-2004-amd64
+    image: luthermonson/drone-git:windows-2004
   - name: build
     pull: always
     image: rancher/dapper:v0.5.6
@@ -197,7 +197,7 @@ steps:
       password:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
-      tag: "${DRONE_TAG}-windows-2004-amd64"
+      tag: "${DRONE_TAG}-windows-2004"
     volumes:
       - name: docker_pipe
         path: \\\\.\\pipe\\docker_engine
@@ -217,7 +217,7 @@ trigger:
       - promote
 ---
 kind: pipeline
-name: windows-20H2-amd64
+name: windows-20H2
 platform:
   os: windows
   arch: amd64
@@ -227,7 +227,7 @@ clone:
   disable: true
 steps:
   - name: clone
-    image: luthermonson/drone-git:windows-20H2-amd64
+    image: luthermonson/drone-git:windows-20H2
   - name: build
     pull: always
     image: rancher/dapper:v0.5.6
@@ -255,7 +255,7 @@ steps:
       password:
         from_secret: docker_password
       repo: "rancher/fluent-bit"
-      tag: "${DRONE_TAG}-windows-20H2-amd64"
+      tag: "${DRONE_TAG}-windows-20H2"
     volumes:
       - name: docker_pipe
         path: \\\\.\\pipe\\docker_engine
@@ -401,11 +401,11 @@ trigger:
       exclude:
         - promote
 depends_on:
-  - windows-1809-amd64
-  - windows-1903-amd64
-  - windows-1909-amd64
-  - windows-2004-amd64
-  - windows-20H2-amd64
+  - windows-1809
+  - windows-1903
+  - windows-1909
+  - windows-2004
+  - windows-20H2
   - linux-amd64
   - linux-arm64
   - linux-arm
