@@ -1,0 +1,4 @@
+{
+    "version": "1.7.4",
+    "dockerfileSource": "https://raw.githubusercontent.com/fluent/fluent-bit/v1.7.4/Dockerfile.windows"
+}
