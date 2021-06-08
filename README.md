@@ -6,7 +6,7 @@
 
 ## Updating
 
-1. Change the value(s) in `version.json` to the new version(s).
+1. Change the value(s) in `config.json` to the new version(s).
 1. Run `make`.
 1. Commit those changes and push/merge into the main branch (`master`).
 1. Tag a new release and push into the main branch (`master`).
