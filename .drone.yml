@@ -63,7 +63,9 @@ clone:
   disable: true
 steps:
   - name: clone
-    image: luthermonson/drone-git:windows-2004-amd64
+    image: rancher/drone-images:git-2004
+    settings:
+      depth: 20
   - name: build
     pull: always
     image: rancher/dapper:v0.5.6
@@ -78,7 +80,7 @@ steps:
         - pull_request
         - tag
   - name: docker-publish
-    image: luthermonson/drone-docker:2004
+    image: rancher/drone-images:docker-2004
     settings:
       build_args:
         - "WINDOWS_VERSION=2004"
@@ -121,7 +123,9 @@ clone:
   disable: true
 steps:
   - name: clone
-    image: luthermonson/drone-git:windows-20H2-amd64
+    image: rancher/drone-images:git-20H2
+    settings:
+      depth: 20
   - name: build
     pull: always
     image: rancher/dapper:v0.5.6
@@ -136,7 +140,7 @@ steps:
         - pull_request
         - tag
   - name: docker-publish
-    image: luthermonson/drone-docker:20H2
+    image: rancher/drone-images:docker-20H2
     settings:
       build_args:
         - "WINDOWS_VERSION=20H2"
@@ -163,108 +167,6 @@ volumes:
   - name: docker_pipe
     host:
       path: \\\\.\\pipe\\docker_engine
-trigger:
-  event:
-    exclude:
-      - promote
----
-kind: pipeline
-name: linux-amd64
-platform:
-  os: linux
-  arch: amd64
-steps:
-  - name: build
-    image: rancher/dapper:v0.5.6
-    environment:
-      USERNAME:
-        from_secret: docker_username
-      PASSWORD:
-        from_secret: docker_password
-    commands:
-      - "export FLUENTBIT_VERSION=1.6.10"
-      - "docker pull fluent/fluent-bit:x86_64-$FLUENTBIT_VERSION"
-      - "docker tag fluent/fluent-bit:x86_64-$FLUENTBIT_VERSION rancher/fluent-bit:${DRONE_TAG}-linux-amd64"
-      - "echo $PASSWORD | docker login --password-stdin --username $USERNAME"
-      - "docker push rancher/fluent-bit:${DRONE_TAG}-linux-amd64"
-    volumes:
-      - name: docker
-        path: /var/run/docker.sock
-    when:
-      event:
-        - tag
-volumes:
-  - name: docker
-    host:
-      path: /var/run/docker.sock
-trigger:
-  event:
-    exclude:
-      - promote
----
-kind: pipeline
-name: linux-arm64
-platform:
-  os: linux
-  arch: arm64
-steps:
-  - name: build
-    image: rancher/dapper:v0.5.6
-    environment:
-      USERNAME:
-        from_secret: docker_username
-      PASSWORD:
-        from_secret: docker_password
-    commands:
-      - "export FLUENTBIT_VERSION=1.6.10"
-      - "docker pull fluent/fluent-bit:arm64v8-$FLUENTBIT_VERSION"
-      - "docker tag fluent/fluent-bit:arm64v8-$FLUENTBIT_VERSION rancher/fluent-bit:${DRONE_TAG}-linux-arm64"
-      - "echo $PASSWORD | docker login --password-stdin --username $USERNAME"
-      - "docker push rancher/fluent-bit:${DRONE_TAG}-linux-arm64"
-    volumes:
-      - name: docker
-        path: /var/run/docker.sock
-    when:
-      event:
-        - tag
-volumes:
-  - name: docker
-    host:
-      path: /var/run/docker.sock
-trigger:
-  event:
-    exclude:
-      - promote
----
-kind: pipeline
-name: linux-arm
-platform:
-  os: linux
-  arch: arm
-steps:
-  - name: build
-    image: rancher/dapper:v0.5.6
-    environment:
-      USERNAME:
-        from_secret: docker_username
-      PASSWORD:
-        from_secret: docker_password
-    commands:
-      - "export FLUENTBIT_VERSION=1.6.10"
-      - "docker pull fluent/fluent-bit:arm32v7-$FLUENTBIT_VERSION"
-      - "docker tag fluent/fluent-bit:arm32v7-$FLUENTBIT_VERSION rancher/fluent-bit:${DRONE_TAG}-linux-arm"
-      - "echo $PASSWORD | docker login --password-stdin --username $USERNAME"
-      - "docker push rancher/fluent-bit:${DRONE_TAG}-linux-arm"
-    volumes:
-      - name: docker
-        path: /var/run/docker.sock
-    when:
-      event:
-        - tag
-volumes:
-  - name: docker
-    host:
-      path: /var/run/docker.sock
 trigger:
   event:
     exclude:
@@ -298,6 +200,3 @@ depends_on:
   - windows-1809
   - windows-2004
   - windows-20H2
-  - linux-amd64
-  - linux-arm64
-  - linux-arm
