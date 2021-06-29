@@ -1,8 +1,9 @@
-# Packaging for fluent-bit
+# Packaging for Windows `fluent-bit` Images
 
 [![dockerhub](https://img.shields.io/docker/v/rancher/fluent-bit?sort=semver&style=flat-square)](https://hub.docker.com/r/rancher/fluent-bit/tags)
 
-`fluent-bit` image packaging for Rancher's Logging v2, which uses the [banzaicloud/logging-operator](https://github.com/banzaicloud/logging-operator).
+This repository houses `fluent-bit` Windows image packaging for [Rancher Logging](https://rancher.com/docs/rancher/v2.5/en/logging/), which is based on the [banzaicloud/logging-operator](https://github.com/banzaicloud/logging-operator).
+For Linux images, use upstream [fluent/fluent-bit](https://hub.docker.com/r/fluent/fluent-bit) or [rancher/mirrored-fluent-fluent-bit](https://hub.docker.com/r/rancher/mirrored-fluent-fluent-bit).
 
 ## Updating
 
