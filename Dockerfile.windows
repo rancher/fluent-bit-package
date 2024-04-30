@@ -8,7 +8,7 @@ ARG WINDOWS_VERSION=ltsc2019
 FROM mcr.microsoft.com/windows/servercore:$WINDOWS_VERSION as builder
 
 # The FLUENTBIT_VERSION ARG must be after the FROM instruction
-ARG FLUENTBIT_VERSION=1.8.9
+ARG FLUENTBIT_VERSION=2.2.0
 ARG IMAGE_CREATE_DATE
 ARG IMAGE_SOURCE_REVISION
 
@@ -42,7 +42,7 @@ WORKDIR /local
 #
 RUN Write-Host ('Installing Fluent Bit'); `
     $majorminor = ([Version]::Parse("$env:FLUENTBIT_VERSION")).toString(2); `
-    Invoke-WebRequest -Uri "https://fluentbit.io/releases/$($majorminor)/td-agent-bit-$($env:FLUENTBIT_VERSION)-win64.zip" -OutFile td-agent-bit.zip; `
+    Invoke-WebRequest -Uri "https://fluentbit.io/releases/$($majorminor)/fluent-bit-$($env:FLUENTBIT_VERSION)-win64.zip" -OutFile td-agent-bit.zip; `
     Expand-Archive -Path td-agent-bit.zip -Destination /local/fluent-bit; `
     Move-Item -Path /local/fluent-bit/*/* -Destination /fluent-bit/;
 
