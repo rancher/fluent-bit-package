@@ -20,9 +20,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Set environment variables
         run: |
           "ARCH=amd64" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: TEMP Pull current image
+        run: docker pull rancher/fluent-bit:2.2.0
+      - name: TEMP Inspect current image
+        run: docker inspect rancher/fluent-bit:2.2.0
+
       - name: Build Docker image
         run: |
           docker build `
