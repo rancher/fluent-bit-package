@@ -1,0 +1,30 @@
+name: Build on Pull Request
+
+on:
+  - pull_request
+  - push
+
+jobs:
+  test_build-windows:
+    strategy:
+      matrix:
+        include:
+          - NANOSERVER_VERSION: 1809
+            TAG_SUFFIX: windows-1809-amd64
+            RUNNER: windows-2019
+          - NANOSERVER_VERSION: ltsc2022
+            TAG_SUFFIX: windows-ltsc2022-amd64
+            RUNNER: windows-2022
+    runs-on: ${{ matrix.RUNNER }}
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build Docker image
+        run: |
+          docker build `
+          -f Dockerfile.windows `
+          --build-arg WINDOWS_VERSION=${{ matrix.NANOSERVER_VERSION }} `
+          --build-arg ARCH=amd64 `
+          -t rancher/fluent-bit:${{ env.VERSION }}-${{ matrix.TAG_SUFFIX }} . 
