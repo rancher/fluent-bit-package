@@ -2,7 +2,6 @@ name: Build on Pull Request
 
 on:
   - pull_request
-  - push
 
 jobs:
   test_build-windows:
@@ -21,10 +20,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Set environment variables
+        run: |
+          "ARCH=amd64" | Out-File -FilePath $env:GITHUB_ENV -Append
       - name: Build Docker image
         run: |
           docker build `
           -f Dockerfile.windows `
           --build-arg WINDOWS_VERSION=${{ matrix.NANOSERVER_VERSION }} `
-          --build-arg ARCH=amd64 `
+          --build-arg ARCH={{ env.ARCH }} `
           -t rancher/fluent-bit:${{ env.VERSION }}-${{ matrix.TAG_SUFFIX }} . 
