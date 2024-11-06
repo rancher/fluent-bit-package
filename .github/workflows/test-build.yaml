@@ -28,5 +28,4 @@ jobs:
           docker build `
           -f Dockerfile.windows `
           --build-arg WINDOWS_VERSION=${{ matrix.NANOSERVER_VERSION }} `
-          --build-arg ARCH={{ env.ARCH }} `
-          -t rancher/fluent-bit:${{ env.VERSION }}-${{ matrix.TAG_SUFFIX }} . 
+          -t rancher/fluent-bit:test-${{ matrix.TAG_SUFFIX }} . 
