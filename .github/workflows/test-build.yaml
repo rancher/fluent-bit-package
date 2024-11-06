@@ -29,3 +29,5 @@ jobs:
           -f Dockerfile.windows `
           --build-arg WINDOWS_VERSION=${{ matrix.NANOSERVER_VERSION }} `
           -t rancher/fluent-bit:test-${{ matrix.TAG_SUFFIX }} . 
+      - name: Inspect image
+        run: docker inspect rancher/fluent-bit:test-${{ matrix.TAG_SUFFIX }}
