@@ -53,8 +53,8 @@ jobs:
           docker image build `
           -f Dockerfile.windows `
           --build-arg WINDOWS_VERSION=${{ matrix.NANOSERVER_VERSION }} `
-          --build-arg ARCH=amd64
-          --build-arg VERSION=${{ github.ref_name }}
+          --build-arg ARCH=amd64 ``
+          --build-arg VERSION=${{ github.ref_name }} `
           -t ${{ env.IMAGE }}:${{ github.ref_name }}-${{ matrix.TAG_SUFFIX }} . 
           
           docker push ${{ env.IMAGE }}:${{ github.ref_name }}-${{ matrix.TAG_SUFFIX }}
