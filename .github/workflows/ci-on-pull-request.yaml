@@ -30,12 +30,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          echo "Tag name: ${{ github.ref_name }}"
           docker build `
           -f Dockerfile.windows `
           --build-arg WINDOWS_VERSION=${{ matrix.NANOSERVER_VERSION }} `
           --build-arg ARCH=amd64 `
-          --build-arg VERSION=${{ github.ref_name }} `
-          -t ${{ env.IMAGE }}:${{ github.ref_name }}-${{ matrix.TAG_SUFFIX }} . 
+          --build-arg VERSION=$test `
+          -t ${{ env.IMAGE }}:test-${{ matrix.TAG_SUFFIX }} . 
       - name: Inspect image
-        run: docker inspect ${{ env.IMAGE }}:${{ github.ref_name }}-${{ matrix.TAG_SUFFIX }}
+        run: docker inspect ${{ env.IMAGE }}:test-${{ matrix.TAG_SUFFIX }}
