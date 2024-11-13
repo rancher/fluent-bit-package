@@ -54,10 +54,10 @@ jobs:
           -f Dockerfile.windows `
           --build-arg WINDOWS_VERSION=${{ matrix.NANOSERVER_VERSION }} `
           --build-arg ARCH=amd64
-          --build-arg VERSION=${{ env.VERSION }}
-          -t ${{ env.IMAGE }}:${{ env.VERSION }}-${{ matrix.TAG_SUFFIX }} . 
+          --build-arg VERSION=${{ github.ref_name }}
+          -t ${{ env.IMAGE }}:${{ github.ref_name }}-${{ matrix.TAG_SUFFIX }} . 
           
-          docker push ${{ env.IMAGE }}:${{ env.VERSION }}-${{ matrix.TAG_SUFFIX }}
+          docker push ${{ env.IMAGE }}:${{ github.ref_name }}-${{ matrix.TAG_SUFFIX }}
 
   create-docker-manifest:
     runs-on: ubuntu-latest
