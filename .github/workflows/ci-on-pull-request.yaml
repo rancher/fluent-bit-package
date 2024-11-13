@@ -3,6 +3,9 @@ name: Build on Pull Request
 on:
   - pull_request
 
+env:
+  IMAGE: rancher/fluent-bit
+
 jobs:
   test_build-windows:
     strategy:
@@ -25,16 +28,14 @@ jobs:
         run: |
           "ARCH=amd64" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-      - name: TEMP Pull current image
-        run: docker pull rancher/fluent-bit:2.2.0
-      - name: TEMP Inspect current image
-        run: docker inspect rancher/fluent-bit:2.2.0
-
       - name: Build Docker image
         run: |
+          echo "Tag name: ${{ github.ref_name }}"
           docker build `
           -f Dockerfile.windows `
           --build-arg WINDOWS_VERSION=${{ matrix.NANOSERVER_VERSION }} `
-          -t rancher/fluent-bit:test-${{ matrix.TAG_SUFFIX }} . 
+          --build-arg ARCH=amd64
+          --build-arg VERSION=${{ github.ref_name }}
+          -t ${{ env.IMAGE }}:${{ github.ref_name }}-${{ matrix.TAG_SUFFIX }} . 
       - name: Inspect image
-        run: docker inspect rancher/fluent-bit:test-${{ matrix.TAG_SUFFIX }}
+        run: docker inspect ${{ env.IMAGE }}:${{ github.ref_name }}-${{ matrix.TAG_SUFFIX }}
