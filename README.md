@@ -2,14 +2,13 @@
 
 [![dockerhub](https://img.shields.io/docker/v/rancher/fluent-bit?sort=semver&style=flat-square)](https://hub.docker.com/r/rancher/fluent-bit/tags)
 
-This repository houses `fluent-bit` Windows image packaging for [Rancher Logging](https://rancher.com/docs/rancher/v2.5/en/logging/), which is based on the [banzaicloud/logging-operator](https://github.com/banzaicloud/logging-operator).
+This repository houses `fluent-bit` Windows image packaging for [Rancher Logging](https://rancher.com/docs/rancher/v2.5/en/logging/), which is based on the [kube-logging/logging-operator](https://github.com/kube-logging/logging-operator).
 For Linux images, use upstream [fluent/fluent-bit](https://hub.docker.com/r/fluent/fluent-bit) or [rancher/mirrored-fluent-fluent-bit](https://hub.docker.com/r/rancher/mirrored-fluent-fluent-bit).
 
 ## Updating
 
-1. Change the value(s) in `config.json` to the new version(s).
-1. Run `make`.
-1. Commit those changes and push/merge into the main branch (`master`).
+Since the upstream fluent-bit project has started building Windows images themselves, the goal of this repository is only to generate a Docker manifest to deploy Windows-2019 and Windows-2022 images under the same tag. To do that only one step is needed:
+
 1. Tag a new release and push into the main branch (`master`).
 
 ## Testing with the Upstream Chart
