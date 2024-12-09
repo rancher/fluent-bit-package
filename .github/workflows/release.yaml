@@ -6,8 +6,7 @@ on:
       - "*"
 
 env:
-  ORIGINAL_IMAGE: fluent/fluent-bit
-  RANCHER_IMAGE: rancher/fluent-bit
+  IMAGE: rancher/fluent-bit
 
 jobs:
   create-docker-manifest:
@@ -38,10 +37,10 @@ jobs:
       - name: Create Docker manifest
         run: |
           echo "creating the manifest list that contains only Windows tags to preserve the os.version metadata"
-          docker manifest create ${{ env.RANCHER_IMAGE }}:${{ github.ref_name }} \
-              ${{ env.ORIGINAL_IMAGE }}:windows-2019-${{ github.ref_name }} \
-              ${{ env.ORIGINAL_IMAGE }}:windows-2022-${{ github.ref_name }}
-          docker manifest push ${{ env.RANCHER_IMAGE }}:${{ github.ref_name }}
+          docker manifest create ${{ env.IMAGE }}:${{ github.ref_name }} \
+              ${{ env.IMAGE }}:windows-2019-${{ github.ref_name }} \
+              ${{ env.IMAGE }}:windows-2022-${{ github.ref_name }}
+          docker manifest push ${{ env.IMAGE }}:${{ github.ref_name }}
 
       - name: Inspect image
-        run: docker buildx imagetools inspect ${{ env.RANCHER_IMAGE }}:${{ github.ref_name }}
+        run: docker buildx imagetools inspect ${{ env.IMAGE }}:${{ github.ref_name }}
