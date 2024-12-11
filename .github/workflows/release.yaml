@@ -38,8 +38,8 @@ jobs:
         run: |
           echo "creating the manifest list that contains only Windows tags to preserve the os.version metadata"
           docker manifest create ${{ env.IMAGE }}:${{ github.ref_name }} \
-              ${{ env.IMAGE }}:windows-2019-${{ github.ref_name }} \
-              ${{ env.IMAGE }}:windows-2022-${{ github.ref_name }}
+              ${{ env.IMAGE }}:windows-2019-${{ github.ref_name }}-amd64 \
+              ${{ env.IMAGE }}:windows-2022-${{ github.ref_name }}-amd64
           docker manifest push ${{ env.IMAGE }}:${{ github.ref_name }}
 
       - name: Inspect image

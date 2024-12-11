@@ -7,9 +7,10 @@ For Linux images, use upstream [fluent/fluent-bit](https://hub.docker.com/r/flue
 
 ## Updating
 
-Since the upstream fluent-bit project has started building Windows images themselves, the goal of this repository is only to generate a Docker manifest to deploy Windows-2019 and Windows-2022 images under the same tag. To do that only one step is needed:
+Since the upstream fluent-bit project has started building Windows images themselves, the goal of this repository is only to generate a Docker manifest to deploy Windows-2019 and Windows-2022 images under the same tag. To do that only two steps are needed:
 
-1. Tag a new release and push into the main branch (`master`).
+1. Mirror the desired tag of the original images to the Dockerhub repository *rancher/fluent-bit* via the [https://github.com/rancher/image-mirror](rancher/image-mirror) automation.
+2. Tag a new release and push into the main branch (`master`). The release tag should match the version mirrored previously.
 
 ## Testing with the Upstream Chart
 
